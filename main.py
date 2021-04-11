@@ -56,13 +56,6 @@ async def meme(ctx):
     memejson = json.loads(requests.get("https://meme-api.herokuapp.com/gimme").text)
     while memejson["nsfw"] == True:
         memejson = json.loads(requests.get("https://meme-api.herokuapp.com/gimme").text)
-    imageUrl = memejson["url"]
-    embed = discord.Embed()
-    embed.set_image(url=imageUrl)
-    await ctx.send(embed=embed)
-
-@client.command()
-async def family(ctx):
-    await ctx.send("pls serverconf familyfriendly true")
+    await ctx.send(embed=discord.Embed().set_image(url=memejson["url"]))
 
 client.run(os.environ["TOKEN"])
