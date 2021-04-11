@@ -63,6 +63,6 @@ async def meme(ctx):
 
 @client.command()
 async def family(ctx):
-    await ctx.send(pls serverconf familyfriendly true)
+    await ctx.send("pls serverconf familyfriendly true")
 
 client.run(os.environ["TOKEN"])
