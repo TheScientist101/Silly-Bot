@@ -61,5 +61,8 @@ async def meme(ctx):
     embed.set_image(url=imageUrl)
     await ctx.send(embed=embed)
 
+@client.command()
+async def family(ctx):
+    await ctx.send(pls serverconf familyfriendly true)
 
 client.run(os.environ["TOKEN"])
