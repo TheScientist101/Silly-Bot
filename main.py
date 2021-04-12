@@ -52,7 +52,7 @@ async def compliment(ctx):
 
 
 @client.command()
-async def meme(ctx, args):
+async def meme(ctx, args=""):
     memejson = json.loads(
         requests.get("https://meme-api.herokuapp.com/gimme/" + args).text
     )
