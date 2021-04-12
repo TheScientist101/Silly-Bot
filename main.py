@@ -63,7 +63,12 @@ async def meme(ctx, args=""):
             memejson = json.loads(
                 requests.get("https://meme-api.herokuapp.com/gimme/" + args).text
             )
-        await ctx.send(embed=discord.Embed().set_image(url=memejson["url"]))
+        profanity.load_censor_words()
+        await ctx.send(
+            embed=discord.Embed(title=profanity.censor(memejson["title"])).set_image(
+                url=memejson["url"]
+            )
+        )
 
 
 client.run(os.environ["TOKEN"])
