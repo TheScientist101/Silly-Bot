@@ -52,10 +52,18 @@ async def compliment(ctx):
 
 
 @client.command()
-async def meme(ctx):
-    memejson = json.loads(requests.get("https://meme-api.herokuapp.com/gimme").text)
-    while memejson["nsfw"] == True:
-        memejson = json.loads(requests.get("https://meme-api.herokuapp.com/gimme").text)
-    await ctx.send(embed=discord.Embed().set_image(url=memejson["url"]))
+async def meme(ctx, args):
+    memejson = json.loads(
+        requests.get("https://meme-api.herokuapp.com/gimme/" + args).text
+    )
+    if "code" in memejson:
+        await ctx.send("The subreddit you gave me is currently not available.")
+    else:
+        while memejson["nsfw"] != False:
+            memejson = json.loads(
+                requests.get("https://meme-api.herokuapp.com/gimme/" + args).text
+            )
+        await ctx.send(embed=discord.Embed().set_image(url=memejson["url"]))
+
 
 client.run(os.environ["TOKEN"])
