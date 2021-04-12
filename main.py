@@ -65,9 +65,9 @@ async def meme(ctx, args=""):
             )
         profanity.load_censor_words()
         await ctx.send(
-            embed=discord.Embed(title=profanity.censor(memejson["title"])).set_image(
-                url=memejson["url"]
-            )
+            embed=discord.Embed(
+                title=profanity.censor(memejson["title"]), url=memejson["postLink"]
+            ).set_image(url=memejson["url"])
         )
 
 
