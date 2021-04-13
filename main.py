@@ -64,7 +64,7 @@ async def meme(ctx, args=""):
             memejson = json.loads(
                 requests.get("https://meme-api.herokuapp.com/gimme/" + args).text
             )
-            i++
+            i += 1
             if i = 10:
                 break
         profanity.load_censor_words()
