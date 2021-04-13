@@ -56,7 +56,7 @@ async def meme(ctx, args=""):
     memejson = json.loads(
         requests.get("https://meme-api.herokuapp.com/gimme/" + args).text
     )
-    if "code" in memejson:
+    if not "nsfw" in memejson and not "url" in memejson:
         await ctx.send("The subreddit you gave me is currently not available.")
     else:
         while memejson["nsfw"] == True:
