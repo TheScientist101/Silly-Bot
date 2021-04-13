@@ -66,6 +66,7 @@ async def meme(ctx, args=""):
             )
             i += 1
             if i == 10:
+                ctx.send("Clean memes were not found after 10 tries, please try again.")
                 break
         profanity.load_censor_words()
         await ctx.send(
