@@ -86,7 +86,10 @@ async def say(ctx, message="", channel: discord.TextChannel = ""):
     if channel == "":
         await ctx.send("Bruh, where do I say it?")
         return
-    await channel.send(f"{message}\n\n\n\nSent By {ctx.message.author.mention}.")
+    if not await channel.send(
+        f"{message}\n\n\n\nSent By {ctx.message.author.mention}."
+    ):
+        await ctx.send("Yo, that channel doesn't exist.")
 
 
 client.run(os.environ["TOKEN"])
