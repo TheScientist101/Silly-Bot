@@ -78,4 +78,12 @@ async def meme(ctx, args=""):
         )
 
 
+@client.command()
+async def say(ctx, message="", channel: discord.TextChannel = ""):
+    if message == "" or channel == "":
+        await ctx.send("Bruh, what do I say?")
+        return
+    await channel.send(f"{message}\n\n\n\nSent By {ctx.message.author.mention}.")
+
+
 client.run(os.environ["TOKEN"])
