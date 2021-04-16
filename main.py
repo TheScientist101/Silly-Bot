@@ -22,8 +22,7 @@ async def on_ready():
 @client.command()
 async def hello(ctx):
     await ctx.send(
-        "Hello there!!! Psst, guys, this {0.author.mention} kid seems dumb.".format(
-            ctx.message
+        "Hello there!!! Psst, guys, this {ctx.author.mention} kid seems dumb.")
         )
     )
 
