@@ -22,7 +22,7 @@ async def on_ready():
 @client.command()
 async def hello(ctx):
     await ctx.send(
-        "Hello there!!! Psst, guys, this {ctx.author.mention} kid seems dumb."
+        f"Hello there!!! Psst, guys, this {ctx.author.mention} kid seems dumb."
     )
 
 
