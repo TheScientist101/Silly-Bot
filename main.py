@@ -82,8 +82,7 @@ async def say(ctx, message="", channel: discord.TextChannel = ""):
         await ctx.send("Bruh, what do I say?")
         return
     if channel == "":
-        await ctx.send("Bruh, where do I say it?")
-        return
+        channel = ctx
     await channel.send(f"{message}\n\n\n\nSent By {ctx.message.author.mention}.")
 
 
