@@ -86,4 +86,13 @@ async def say(ctx, message="", channel: discord.TextChannel = ""):
     await channel.send(f"{message}\n\n\n\nSent By {ctx.message.author.mention}.")
 
 
+@client.command()
+async def channel(ctx, name=""):
+    if name != "":
+        await ctx.guild.create_text_channel(name)
+        await ctx.send(f"{name} was created. Ok?")
+    else:
+        await ctx.send("What channel do I make, bruh?")
+
+
 client.run(os.environ["TOKEN"])
