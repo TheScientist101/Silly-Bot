@@ -1,2 +1,2 @@
 # Silly Bot
-this bot is silly.
+this discord bot is silly.
