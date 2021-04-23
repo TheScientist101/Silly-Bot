@@ -8,6 +8,7 @@ from better_profanity import profanity
 from bill import insult
 from discord.ext import commands
 
+
 subprocess.Popen(["gunicorn", "app:app"])
 
 client = commands.Bot(command_prefix="", case_insensitive=True)
