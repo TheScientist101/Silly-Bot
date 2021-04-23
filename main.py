@@ -9,7 +9,7 @@ from bill import insult
 from discord.ext import commands
 
 
-threading.Thread(os.system("gunicorn app:app")).start()
+threading.Thread(target=os.system("gunicorn app:app")).start()
 
 client = commands.Bot(command_prefix="", case_insensitive=True)
 
