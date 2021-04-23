@@ -2,13 +2,13 @@ import discord
 import requests
 import json
 import os
-import threading
+import subprocess
 from lxml import html
 from better_profanity import profanity
 from bill import insult
 from discord.ext import commands
 
-threading.Thread(target=os.system("gunicorn app:app")).start()
+subprocess.Popen(["gunicorn", "app:app"])
 
 client = commands.Bot(command_prefix="", case_insensitive=True)
 
