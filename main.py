@@ -83,19 +83,20 @@ async def meme(ctx, args=""):
 
 
 async def say(ctx, args=""):
-    if len(shlex.split(args)) >= 2:
-        if shlex.split(args)[1].startswith("<"):
-            channel = client.get_channel(
-                int(shlex.split(args)[1].strip("<").strip(">").strip("#"))
-            )
+    argv = shlex.split(args)
+    if len(argv) >= 2:
+        channel = shlex.split(args)[1]
+        if channel.startswith("<"):
+            channel = client.get_channel(int(channel.strip("<").strip(">").strip("#")))
         else:
-            channel = discord.utils.get(
-                ctx.guild.text_channels, name=shlex.split(args)[1]
-            )
+            channel = discord.utils.get(ctx.guild.text_channels, name=channel)
+        if channel == None:
+            ctx.send("Bruh, give me a real channel, or nothing at all.")
     else:
         channel = ""
-    message = shlex.split(args)[0]
-    if message == "":
+    if len(argv) >= 1:
+        message = shlex.split(args)[0]
+    else message == "":
         await ctx.send("Bruh, what do I say?")
         return
     if channel == "":
