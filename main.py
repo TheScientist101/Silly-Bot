@@ -18,7 +18,7 @@ if not "TOKEN" in os.environ:
 @client.event
 async def on_ready():
     print('Connected to bot: {}'.format(client.user.name))
-    print('Bot ID: {}'.format(client.user.id)))
+    print('Bot ID: {}'.format(client.user.id))
     client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name='https://silly-bot.vercel.app/'))
 
 
