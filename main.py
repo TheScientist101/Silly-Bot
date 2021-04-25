@@ -91,7 +91,8 @@ async def say(ctx, args=""):
         else:
             channel = discord.utils.get(ctx.guild.text_channels, name=channel)
         if channel == None:
-            ctx.send("Bruh, give me a real channel, or nothing at all.")
+            await ctx.send("Bruh, give me a real channel, or nothing at all.")
+            return
     else:
         channel = ""
     if len(argv) >= 1:
