@@ -2,7 +2,7 @@ import discord
 import requests
 import json
 import os
-import subprocess
+import shlex
 from lxml import html
 from better_profanity import profanity
 from bill import insult
@@ -20,21 +20,30 @@ async def on_ready():
     print("Bot is ready")
 
 
-@client.command()
-async def hello(ctx):
+@client.event
+async def on_message(message):
+    ctx = await client.get_context(message)
+    command = message.content.split()[0].lower()
+    commands = ['hello', 'roast', 'compliment', 'meme', 'say']
+    if command in commands 
+    await eval(
+        command + f"(ctx, '{message.content.partition(' ')[2]}')"
+    )
+    print("await " + message.content.split()[0] + f"(ctx)")
+
+
+async def hello(ctx, args=""):
     await ctx.send(
         f"Hello there!!! Psst, guys, this {ctx.author.mention} kid seems dumb."
     )
 
 
-@client.command()
-async def roast(ctx):
+async def roast(ctx, args=""):
     profanity.load_censor_words()
     await ctx.send(profanity.censor("You are a " + insult()))
 
 
-@client.command()
-async def compliment(ctx):
+async def compliment(ctx, args=""):
     profanity.load_censor_words()
     await ctx.send(
         profanity.censor(
@@ -50,7 +59,6 @@ async def compliment(ctx):
     )
 
 
-@client.command()
 async def meme(ctx, args=""):
     memejson = json.loads(
         requests.get("https://meme-api.herokuapp.com/gimme/" + args).text
@@ -77,23 +85,27 @@ async def meme(ctx, args=""):
         )
 
 
-@client.command()
-async def say(ctx, message="", channel: discord.TextChannel = ""):
+async def say(ctx, args=""):
+    if len(shlex.split(args)) >= 2:
+        if shlex.split(args)[1].startswith("<"):
+            channel = print(
+                client.get_channel(
+                    shlex.split(args)[1].strip("<").strip(">").strip("#")
+                )
+            )
+        else:
+            channel = discord.utils.get(
+                ctx.guild.text_channels, name=shlex.split(args)[1]
+            )
+    else:
+        channel = ""
+    message = shlex.split(args)[0]
     if message == "":
         await ctx.send("Bruh, what do I say?")
         return
     if channel == "":
         channel = ctx
     await channel.send(f"{message}\n\n\n\nSent By {ctx.message.author.mention}.")
-
-
-@client.command()
-async def channel(ctx, name=""):
-    if name != "":
-        await ctx.guild.create_text_channel(name)
-        await ctx.send(f"{name} was created. Ok?")
-    else:
-        await ctx.send("What channel do I make, bruh?")
 
 
 client.run(os.environ["TOKEN"])
