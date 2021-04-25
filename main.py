@@ -96,7 +96,7 @@ async def say(ctx, args=""):
         channel = ""
     if len(argv) >= 1:
         message = shlex.split(args)[0]
-    else message == "":
+    else:
         await ctx.send("Bruh, what do I say?")
         return
     if channel == "":
