@@ -86,7 +86,7 @@ async def say(ctx, args=""):
     if len(shlex.split(args)) >= 2:
         if shlex.split(args)[1].startswith("<"):
             channel = client.get_channel(
-                shlex.split(args)[1].strip("<").strip(">").strip("#")
+                int(shlex.split(args)[1].strip("<").strip(">").strip("#"))
             )
         else:
             channel = discord.utils.get(
