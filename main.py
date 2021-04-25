@@ -23,10 +23,11 @@ async def on_ready():
 @client.event
 async def on_message(message):
     ctx = await client.get_context(message)
-    command = message.content.split()[0].lower()
-    commands = ["hello", "roast", "compliment", "meme", "say"]
-    if command in commands:
-        await eval(command + f"(ctx, '{message.content.partition(' ')[2]}')")
+    if ctx.author.Bot:
+        command = message.content.split()[0].lower()
+        commands = ["hello", "roast", "compliment", "meme", "say"]
+        if command in commands:
+            await eval(command + f"(ctx, '{message.content.partition(' ')[2]}')")
 
 
 async def hello(ctx, args=""):
