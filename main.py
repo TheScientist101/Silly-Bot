@@ -17,9 +17,13 @@ if not "TOKEN" in os.environ:
 
 @client.event
 async def on_ready():
-    print('Connected to bot: {}'.format(client.user.name))
-    print('Bot ID: {}'.format(client.user.id))
-    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.custom, state="Waiting for https://silly-bot.vercel.app/"))
+    print("Connected to bot: {}".format(client.user.name))
+    print("Bot ID: {}".format(client.user.id))
+    await bot.change_presence(
+        activity=discord.Streaming(
+            name="Waiting for website.", url="https://silly-bot.vercel.app/"
+        )
+    )
 
 
 @client.event
