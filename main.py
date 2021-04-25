@@ -23,7 +23,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
     ctx = await client.get_context(message)
-    if ctx.author.Bot:
+    if not ctx.author.bot:
         command = message.content.split()[0].lower()
         commands = ["hello", "roast", "compliment", "meme", "say"]
         if command in commands:
