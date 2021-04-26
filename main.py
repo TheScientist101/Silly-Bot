@@ -65,7 +65,9 @@ async def compliment(ctx, args=""):
 
 
 async def meme(ctx, args=""):
-    subreddit = shlex.split(args)
+    subreddit = ""
+    if len(shlex.split(args)) >= 1:
+        subreddit = shlex.split(args)[0]
     memejson = json.loads(
         requests.get("https://meme-api.herokuapp.com/gimme/" + subreddit).text
     )
