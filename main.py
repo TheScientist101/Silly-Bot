@@ -99,7 +99,7 @@ async def say(ctx, args=""):
         channel = shlex.split(args)[1]
         if discord.utils.get(ctx.guild.text_channels, name=channel) != None:
             channel = discord.utils.get(ctx.guild.text_channels, name=channel)
-        else:
+        elif channel.startswith("<#"):
             channel = client.get_channel(int(channel.strip("<").strip(">").strip("#")))
         if channel == None:
             await ctx.send("Bruh, give me a real channel, or nothing at all.")
