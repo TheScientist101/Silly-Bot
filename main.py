@@ -19,6 +19,7 @@ if not "TOKEN" in os.environ:
 async def on_ready():
     print("Connected to bot: {}".format(client.user.name))
     print("Bot ID: {}".format(client.user.id))
+    print("--------------------")
     await client.change_presence(
         activity=discord.Activity(
             type=discord.ActivityType.watching,
