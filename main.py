@@ -34,7 +34,7 @@ async def on_message(message):
         command = message.content.split()[0].lower()
         commands = ["hello", "roast", "compliment", "meme", "say"]
         if command in commands:
-            await eval(command + f"""(ctx, """{message.content.partition(' ')[2]}""")""")
+            await eval(command + f"(ctx, '{message.content.partition(' ')[2]}')")
 
 
 async def hello(ctx, args=""):
