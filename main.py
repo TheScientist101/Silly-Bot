@@ -32,9 +32,19 @@ async def on_message(message):
     ctx = await client.get_context(message)
     if not ctx.author.bot and len(message.content.split()) > 0:
         command = message.content.split()[0].lower()
-        commands = ["hello", "roast", "compliment", "meme", "say"]
-        if command in commands:
-            await eval(command + f"(ctx, '{message.content.partition(' ')[2]}')")
+        commands = {
+            "hello": hello,
+            "roast": roast,
+            "compliment": compliment,
+            "meme": meme,
+            "say": say
+        }
+        if command not in commands:
+            return False
+        try:
+            await commands[command](ctx, message.content.partition(' ')[2])
+        except Exception:
+            await ctx.send("There was an completing your request. Please try again or submit an issue in the GitHub.")
 
 
 async def hello(ctx, args=""):
@@ -77,7 +87,8 @@ async def meme(ctx, args=""):
         i = 0
         while memejson["nsfw"] == True:
             memejson = json.loads(
-                requests.get("https://meme-api.herokuapp.com/gimme/" + args).text
+                requests.get(
+                    "https://meme-api.herokuapp.com/gimme/" + args).text
             )
             i += 1
             if i == 10:
@@ -100,7 +111,8 @@ async def say(ctx, args=""):
         if discord.utils.get(ctx.guild.text_channels, name=channel) != None:
             channel = discord.utils.get(ctx.guild.text_channels, name=channel)
         elif channel.startswith("<#"):
-            channel = client.get_channel(int(channel.strip("<").strip(">").strip("#")))
+            channel = client.get_channel(
+                int(channel.strip("<").strip(">").strip("#")))
         else:
             channel = None
         if channel == None:
